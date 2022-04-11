@@ -8,7 +8,7 @@ import java.net.UnknownHostException;
 
 public class App {
     public String getGreeting() {
-        return "Hello World!";
+        return "This is the server!";
     }
 
     public static void main(String[] args) throws UnknownHostException {

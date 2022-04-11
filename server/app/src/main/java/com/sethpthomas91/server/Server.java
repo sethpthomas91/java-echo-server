@@ -45,9 +45,9 @@ public class Server {
             while ((inputLine = input.readLine()) != null) {
                 System.out.println(String.format("[INCOMING MESSAGE]: %s", inputLine));
                 outputLine = handler.processInput(inputLine);
+                output.println(outputLine);
                 System.out.println(String.format("[OUTGOING MESSAGE]: %s", outputLine));
-                System.out.println("DISCONNECTING");
-                break;
+
             }
         } catch (IOException e) {
             e.printStackTrace();
