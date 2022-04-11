@@ -28,9 +28,9 @@ public class Server {
         try (
                 ServerSocket serverSocket = new ServerSocket(PORT);
                 Socket clientSocket = serverSocket.accept();
-                PrintWriter output = new PrintWriter(clientSocket.getOutputStream(), true);
+                PrintWriter writerToClient = new PrintWriter(clientSocket.getOutputStream(), true);
                 InputStreamReader inputStreamReader = new InputStreamReader(clientSocket.getInputStream());
-                BufferedReader input = new BufferedReader(inputStreamReader);
+                BufferedReader inputFromClient = new BufferedReader(inputStreamReader);
                 ) {
 
             String inputLine;
@@ -38,14 +38,14 @@ public class Server {
 
             HandleClientProtocol handler = new HandleClientProtocol();
             outputLine = handler.processInput(null);
-            output.println(outputLine);
+            writerToClient.println(outputLine);
 
             System.out.println("[Connection Established]");
 
-            while ((inputLine = input.readLine()) != null) {
+            while ((inputLine = inputFromClient.readLine()) != null) {
                 System.out.println(String.format("[INCOMING MESSAGE]: %s", inputLine));
                 outputLine = handler.processInput(inputLine);
-                output.println(outputLine);
+                writerToClient.println(outputLine);
                 System.out.println(String.format("[OUTGOING MESSAGE]: %s", outputLine));
 
             }

@@ -7,15 +7,10 @@ import java.net.Inet4Address;
 import java.net.UnknownHostException;
 
 public class App {
-    public String getGreeting() {
-        return "This is the server!";
-    }
 
     public static void main(String[] args) throws UnknownHostException {
-        System.out.println(new App().getGreeting());
         Server server = new Server();
         server.startServer();
     }
-
 
 }

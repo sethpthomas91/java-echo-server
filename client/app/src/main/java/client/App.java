@@ -6,12 +6,8 @@ package client;
 import java.io.IOException;
 
 public class App {
-    public String getGreeting() {
-        return "This is the client!";
-    }
 
     public static void main(String[] args) throws IOException {
-        System.out.println(new App().getGreeting());
         Client client = new Client();
         client.startClient();
     }
