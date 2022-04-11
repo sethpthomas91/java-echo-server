@@ -13,6 +13,8 @@ public class App {
 
     public static void main(String[] args) throws UnknownHostException {
         System.out.println(new App().getGreeting());
+        Server server = new Server();
+        server.startServer();
     }
 
 
