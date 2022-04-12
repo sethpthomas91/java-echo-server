@@ -16,21 +16,15 @@ public class Server {
     public Server() throws UnknownHostException {
     }
 
-    public static String getLocalIPAddress() throws UnknownHostException {
-        String localIPAddress = Inet4Address.getLocalHost().getHostAddress();
-        return localIPAddress;
-    }
-
-    public void startServer(){
+    public void startServer() throws Exception {
 
         System.out.println(String.format("[LISTING TO PORT %s]", PORT));
 
         try (
-                ServerSocket serverSocket = new ServerSocket(PORT);
-                Socket clientSocket = serverSocket.accept();
-                PrintWriter writerToClient = new PrintWriter(clientSocket.getOutputStream(), true);
-                InputStreamReader inputStreamReader = new InputStreamReader(clientSocket.getInputStream());
-                BufferedReader inputFromClient = new BufferedReader(inputStreamReader);
+                ServerSocket serverSocket = createServerSocket(PORT);
+                Socket clientSocket = createClientSocket(serverSocket);
+                PrintWriter writerToClient = createPrintWriterToClient(clientSocket);
+                BufferedReader inputFromClient = createInputFromClientReader(clientSocket);
                 ) {
 
             String inputLine;
@@ -49,9 +43,36 @@ public class Server {
                 System.out.println(String.format("[OUTGOING MESSAGE]: %s", outputLine));
 
             }
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException error) {
+            System.out.println(String.format("Exception caught when listening to port %s or listening for a connection.", PORT));
+            throw new IOException(error.getMessage());
         }
+    }
+
+    private ServerSocket createServerSocket(int PORT) throws IOException {
+        ServerSocket serverSocket = new ServerSocket(PORT);
+        return serverSocket;
+    }
+
+    private Socket createClientSocket(ServerSocket serverSocket) throws IOException {
+        Socket clientSocket = serverSocket.accept();
+        return clientSocket;
+    }
+
+    private PrintWriter createPrintWriterToClient(Socket clientSocket) throws IOException {
+        PrintWriter writerToClient = new PrintWriter(clientSocket.getOutputStream(), true);
+        return writerToClient;
+    }
+
+    private BufferedReader createInputFromClientReader(Socket clientSocket) throws IOException {
+        InputStreamReader inputStreamReader = new InputStreamReader(clientSocket.getInputStream());
+        BufferedReader inputFromClient = new BufferedReader(inputStreamReader);
+        return inputFromClient;
+    }
+
+    private static String getLocalIPAddress() throws UnknownHostException {
+        String localIPAddress = Inet4Address.getLocalHost().getHostAddress();
+        return localIPAddress;
     }
 
 }
