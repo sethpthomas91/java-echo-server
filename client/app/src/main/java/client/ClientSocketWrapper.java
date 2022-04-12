@@ -8,7 +8,7 @@ import java.net.Inet4Address;
 import java.net.Socket;
 import java.net.UnknownHostException;
 
-public class ClientSocketWrapper {
+public class ClientSocketWrapper implements AutoCloseable{
     private String LOCAL_HOST_NAME;
     private int PORT = 5050;
     private Socket socket;
@@ -22,17 +22,20 @@ public class ClientSocketWrapper {
         this.listenToServerSocket(socket);
     }
 
-    public String recieveMessageFromServer() throws IOException {
+    public String receiveMessageFromServer() throws IOException {
         String message = input.readLine();
+        System.out.println(String.format("[SERVER MESSAGE]: %s", message));
         return message;
     }
 
     public void sendMessageToServer(String message){
+        System.out.println(String.format("[CLIENT OUTGOING MESSAGE]: %s", message));
         output.println(message);
     }
 
     private Socket createSocketAt(String LOCAL_HOST_NAME, int PORT) throws IOException {
         socket = new Socket(LOCAL_HOST_NAME, PORT);
+        System.out.println(String.format("[CONNECTED TO SERVER at HOST: %s at PORT: %s]", LOCAL_HOST_NAME, PORT));
         return socket;
     }
 
@@ -42,7 +45,7 @@ public class ClientSocketWrapper {
     }
 
     private PrintWriter createPrintWriter(Socket socket) throws IOException {
-        output = new PrintWriter(socket.getOutputStream());
+        output = new PrintWriter(socket.getOutputStream(), true);
         return output;
     }
 
