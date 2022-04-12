@@ -34,6 +34,7 @@ public class ServerSocketWrapper implements AutoCloseable{
 
     private ServerSocket startServerSocketAt(int PORT) throws IOException {
         serverSocket = new ServerSocket(PORT);
+        System.out.println(String.format("[LISTING TO PORT %s]", PORT));
         return serverSocket;
     }
 

@@ -16,9 +16,6 @@ public class Server {
     }
 
     public void startServer() throws Exception {
-
-        System.out.println(String.format("[LISTING TO PORT %s]", PORT));
-
         try (
                 ServerSocketWrapper serverSocket = new ServerSocketWrapper(PORT);
                 ) {
@@ -28,6 +25,7 @@ public class Server {
 
             HandleClientProtocol handler = new HandleClientProtocol();
             messageToClient = handler.processInput(null);
+
             serverSocket.sendMessageToClient(messageToClient);
 
             while ((messageFromClient = serverSocket.receiveMessageFromClient()) != null) {
@@ -38,12 +36,6 @@ public class Server {
             System.out.println(String.format("Exception caught when listening to port %s or listening for a connection.", PORT));
             throw new IOException(error.getMessage());
         }
-    }
-
-
-    private static String getLocalIPAddress() throws UnknownHostException {
-        String localIPAddress = Inet4Address.getLocalHost().getHostAddress();
-        return localIPAddress;
     }
 
 }
