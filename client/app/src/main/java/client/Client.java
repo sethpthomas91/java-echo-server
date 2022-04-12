@@ -3,10 +3,7 @@ package client;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.net.Inet4Address;
-import java.net.Socket;
-import java.net.UnknownHostException;
 
 public class Client {
     String LOCAL_HOST_NAME = Inet4Address.getLocalHost().getHostName();
@@ -21,7 +18,7 @@ public class Client {
         return stdIn.readLine();
     }
 
-    public void startClient() throws IOException {
+    public void startClient() {
         try (
                 ClientSocketWrapper clientSocket = new ClientSocketWrapper()
         ) {

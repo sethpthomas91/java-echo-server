@@ -35,7 +35,7 @@ public class ClientSocketWrapper implements AutoCloseable{
 
     private Socket createSocketAt(String LOCAL_HOST_NAME, int PORT) throws IOException {
         socket = new Socket(LOCAL_HOST_NAME, PORT);
-        System.out.println(String.format("[CONNECTED TO SERVER at HOST: %s at PORT: %s]", LOCAL_HOST_NAME, PORT));
+        System.out.println(String.format("[CONNECTED TO SERVER at HOST: | %s | at PORT: %s]", LOCAL_HOST_NAME, PORT));
         return socket;
     }
 
