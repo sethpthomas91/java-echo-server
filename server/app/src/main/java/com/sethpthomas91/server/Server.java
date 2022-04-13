@@ -3,11 +3,17 @@ package com.sethpthomas91.server;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
+//1. Set the port
+//2. Open/Listen on a socket
+//3. Bind a client connection
+//4. Echo a message from client
+//5. Close the same socket
+
 public class Server implements AutoCloseable {
     public int PORT = 5050;
-    private final ServerSocketWrapper serverSocket;
+    private final ServerSocketWrapperInterface serverSocket;
 
-    public Server(ServerSocketWrapper serverSocket) {
+    public Server(ServerSocketWrapperInterface serverSocket) {
         this.serverSocket = serverSocket;
     }
 

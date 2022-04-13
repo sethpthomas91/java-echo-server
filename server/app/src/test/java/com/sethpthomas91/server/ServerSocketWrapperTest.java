@@ -22,7 +22,6 @@ public class ServerSocketWrapperTest {
 
     @Test
     public void sendMessageToClient() throws Exception {
-//        Trying to get this integration test working.
 //        String message = "Hello";
 //        Socket socket = new Socket(Inet4Address.getLocalHost().getHostName(), 5050);
 //        InputStreamReader inputStream = new InputStreamReader(socket.getInputStream());
@@ -30,6 +29,14 @@ public class ServerSocketWrapperTest {
 //        String incomingMessage = input.readLine();
 //        serverSocket.sendMessageToClient(message);
 //        Assert.assertEquals(message, incomingMessage);
+    }
+
+    @Test
+    public void testSocketConnectionIsCreated() throws Exception {
+//        boolean isAlive = false;
+//        Socket testSocket = new Socket(Inet4Address.getLocalHost().getHostName(), 5050);
+//        isAlive = testSocket.isConnected();
+//        Assert.assertEquals(true, isAlive);
     }
 
     @Test

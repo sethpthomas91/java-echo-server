@@ -7,12 +7,12 @@ import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-public class ServerSocketWrapper implements AutoCloseable{
+public class ServerSocketWrapper implements AutoCloseable, ServerSocketWrapperInterface{
 
     private ServerSocket serverSocket;
     private Socket clientSocket;
-    public PrintWriter writerToClient;
-    public BufferedReader inputFromClient;
+    private PrintWriter writerToClient;
+    private BufferedReader inputFromClient;
 
     public ServerSocketWrapper(int PORT) throws IOException {
         this.startServerSocketAt(PORT);

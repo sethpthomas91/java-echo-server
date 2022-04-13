@@ -12,10 +12,12 @@ import static org.junit.Assert.*;
 
 public class ServerTest {
     private Server server;
+    private DummyServerWrapper serverSocket;
 
     @Before
     public void setUp() throws Exception {
-        server = new Server();
+        serverSocket = new DummyServerWrapper(5050);
+        server = new Server(serverSocket);
     }
 
     @After
