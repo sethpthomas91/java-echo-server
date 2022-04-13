@@ -3,16 +3,18 @@ package com.sethpthomas91.server;
 import java.io.IOException;
 import java.net.UnknownHostException;
 
-public class Server {
+public class Server implements AutoCloseable {
     public int PORT = 5050;
+    private final ServerSocketWrapper serverSocket;
 
-    public Server() throws UnknownHostException {
+    public Server(ServerSocketWrapper serverSocket) {
+        this.serverSocket = serverSocket;
     }
 
     public void startServer() throws Exception {
         try (
-                ServerSocketWrapper serverSocket = new ServerSocketWrapper(PORT);
-                ) {
+                serverSocket
+        ) {
 
             String messageFromClient;
             String messageToClient;
@@ -32,4 +34,8 @@ public class Server {
         }
     }
 
+    @Override
+    public void close() throws Exception {
+
+    }
 }
