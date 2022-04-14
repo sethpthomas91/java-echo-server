@@ -9,9 +9,6 @@ import java.net.UnknownHostException;
 public class App {
 
     public static void main(String[] args) throws Exception {
-        ServerSocketWrapper serverSocket = new ServerSocketWrapper(5050);
-        Server server = new Server(serverSocket);
-        server.startServer();
     }
 
 }
