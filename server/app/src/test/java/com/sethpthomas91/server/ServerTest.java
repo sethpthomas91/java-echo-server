@@ -57,6 +57,12 @@ public class ServerTest {
     }
 
     @Test
+    public void testServerSocketWrapperStartsWithUnconnectedSocket() throws IOException {
+        ServerSocketWrapper serverSocket = new ServerSocketWrapper();
+        Assert.assertFalse(serverSocket.isConnected());
+    }
+
+    @Test
     public void testServerSocketStartsSocketWhenStartIsCalled() throws IOException {
         int port = 5011;
         MockServerSocketWrapper serverSocket = new MockServerSocketWrapper();
@@ -67,4 +73,14 @@ public class ServerTest {
         server.close();
     }
 
+    @Test
+    public void testServerSocketClosesWhenServerCloses() throws IOException {
+        int port = 5012;
+        MockServerSocketWrapper serverSocket = new MockServerSocketWrapper();
+        Server server = new Server(serverSocket);
+        server.setPort(port);
+        server.start();
+        server.close();
+        Assert.assertFalse(serverSocket.isConnected());
+    }
 }

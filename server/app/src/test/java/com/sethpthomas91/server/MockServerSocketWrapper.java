@@ -39,6 +39,10 @@ public class MockServerSocketWrapper implements ServerSocketInterface{
         serverSocketWasCreated = true;
     }
 
+    @Override
+    public void closeSocket() throws IOException {
+    }
+
     public boolean serverSocketWasCreated() {
         return serverSocketWasCreated;
     }

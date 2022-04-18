@@ -24,4 +24,9 @@ public class ServerSocketWrapper implements ServerSocketInterface{
         serverSocket = new ServerSocket(port);
     }
 
+    @Override
+    public void closeSocket() throws IOException {
+        connected = false;
+    }
+
 }

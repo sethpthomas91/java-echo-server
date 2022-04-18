@@ -26,8 +26,9 @@ public class Server {
         serverSocket.startSocketAt(port);
     }
 
-    public void close() {
+    public void close() throws IOException {
         wasStarted = false;
+        serverSocket.closeSocket();
     }
 
     public int getPort() {
