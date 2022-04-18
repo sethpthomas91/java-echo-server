@@ -11,10 +11,10 @@ import java.io.IOException;
 public class Server {
     public boolean wasStarted = false;
     public int port;
-    public ServerSocketInterface serverSocket;
+    public ServerSocketInterface serverSocketWrapper;
 
-    public Server(ServerSocketInterface serverSocket) {
-        this.serverSocket = serverSocket;
+    public Server(ServerSocketInterface serverSocketWrapper) {
+        this.serverSocketWrapper = serverSocketWrapper;
     }
 
     public boolean started() {
@@ -23,12 +23,12 @@ public class Server {
 
     public void start() throws IOException {
         wasStarted = true;
-        serverSocket.startSocketAt(port);
+        serverSocketWrapper.startSocketAt(port);
     }
 
     public void close() throws IOException {
         wasStarted = false;
-        serverSocket.closeSocket();
+        serverSocketWrapper.closeSocket();
     }
 
     public int getPort() {

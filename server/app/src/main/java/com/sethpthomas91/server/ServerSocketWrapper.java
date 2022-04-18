@@ -2,6 +2,7 @@ package com.sethpthomas91.server;
 
 import java.io.IOException;
 import java.net.ServerSocket;
+import java.net.Socket;
 
 public class ServerSocketWrapper implements ServerSocketInterface{
     private boolean connected = false;
@@ -27,6 +28,16 @@ public class ServerSocketWrapper implements ServerSocketInterface{
     @Override
     public void closeSocket() throws IOException {
         connected = false;
+    }
+
+    @Override
+    public Socket connectToClient(ServerSocket serverSocket) {
+        return null;
+    }
+
+    @Override
+    public void createClientReader() throws IOException {
+
     }
 
 }

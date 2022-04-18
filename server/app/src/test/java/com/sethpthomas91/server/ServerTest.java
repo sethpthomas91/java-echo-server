@@ -50,37 +50,61 @@ public class ServerTest {
 
     @Test
     public void testServerSocketWrapperCreatesSocket() throws IOException {
-        ServerSocketWrapper serverSocket = new ServerSocketWrapper();
+        ServerSocketWrapper wrapper = new ServerSocketWrapper();
         int port = 5010;
-        serverSocket.startSocketAt(port);
-        Assert.assertTrue(serverSocket.isConnected());
+        wrapper.startSocketAt(port);
+        Assert.assertTrue(wrapper.isConnected());
     }
 
     @Test
     public void testServerSocketWrapperStartsWithUnconnectedSocket() throws IOException {
-        ServerSocketWrapper serverSocket = new ServerSocketWrapper();
-        Assert.assertFalse(serverSocket.isConnected());
+        ServerSocketWrapper wrapper = new ServerSocketWrapper();
+        Assert.assertFalse(wrapper.isConnected());
     }
 
     @Test
     public void testServerSocketStartsSocketWhenStartIsCalled() throws IOException {
         int port = 5011;
-        MockServerSocketWrapper serverSocket = new MockServerSocketWrapper();
-        Server server = new Server(serverSocket);
+        MockServerSocketWrapper wrapper = new MockServerSocketWrapper();
+        Server server = new Server(wrapper);
         server.setPort(port);
         server.start();
-        Assert.assertTrue(serverSocket.serverSocketWasCreated());
+        Assert.assertTrue(wrapper.serverSocketWasCreated());
         server.close();
     }
 
     @Test
     public void testServerSocketClosesWhenServerCloses() throws IOException {
         int port = 5012;
-        MockServerSocketWrapper serverSocket = new MockServerSocketWrapper();
-        Server server = new Server(serverSocket);
+        MockServerSocketWrapper wrapper = new MockServerSocketWrapper();
+        Server server = new Server(wrapper);
         server.setPort(port);
         server.start();
         server.close();
-        Assert.assertFalse(serverSocket.isConnected());
+        Assert.assertFalse(wrapper.isConnected());
     }
+
+//    @Test
+//    public void testServerListensForClient() throws IOException {
+//        int port = 5013;
+//        MockServerSocketWrapper serverSocket = new MockServerSocketWrapper();
+//        Server server = new Server(serverSocket);
+//        server.setPort(port);
+//        server.start();
+//        Assert.assertTrue(serverSocket.serverIsListening());
+//        server.close();
+//    }
+
+//    @Test
+//    public void testServerCreatesReader() throws IOException {
+//        int port = 5014;
+//        MockServerSocketWrapper serverSocket = new MockServerSocketWrapper();
+//        Server server = new Server(serverSocket);
+//        server.setPort(port);
+//        server.start();
+//        Assert.assertTrue(serverSocket.readerCreated());
+//        server.close();
+//    }
+
+
 }
